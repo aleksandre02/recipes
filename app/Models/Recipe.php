@@ -22,4 +22,11 @@ class Recipe extends Model
     }
 
     // Define other relationships
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+
 }

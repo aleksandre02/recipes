@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+    
+
 
 class RecipeController extends Controller
 {
@@ -17,18 +19,35 @@ class RecipeController extends Controller
     {
         return view('recipes.create');
     }
-
-    public function store(Request $request)
+    public function store(RecipeRequest $request)
     {
-        $recipe = new Recipe();
-        $recipe->name = $request->name;
-        $recipe->description = $request->description;
+        // Create a new recipe instance with validated data
+        $recipe = new Recipe($request->validated());
+
+        // Handle file upload if present
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            $recipe->photo = $path;
+        }
+
+        // Save the recipe to the database
         $recipe->save();
 
-        // Save other details like ingredients, steps, etc.
-
+        // Redirect to the recipes index page
         return redirect()->route('recipes.index');
     }
+    
+    // public function store(Request $request)
+    // {
+    //     $recipe = new Recipe();
+    //     $recipe->name = $request->name;
+    //     $recipe->description = $request->description;
+    //     $recipe->save();
+
+    //     // Save other details like ingredients, steps, etc.
+
+    //     return redirect()->route('recipes.index');
+    // }
 
     public function edit($id)
     {
@@ -75,5 +94,8 @@ class RecipeController extends Controller
     $recipes = $query->get();
     return view('recipes.index', compact('recipes'));
     }
+
+
+
 
 }
