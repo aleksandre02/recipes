@@ -10,11 +10,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->id('recipe_id');
+            $table->id();
             $table->string('title');
             $table->text('description');
             $table->string('media')->nullable();
-            $table->foreignId('user_id')->constrained('users','user_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -9,10 +9,10 @@ return new class extends Migration
         public function up()
         {
             Schema::create('comments', function (Blueprint $table) {
-                $table->id('comment_id');
-                $table->foreignId('user_id')->constrained('users','user_id');
-                $table->foreignId('recipe_id')->constrained('recipes','recipe_id');
-                $table->text('description');
+                $table->id();
+                $table->foreignId('user_id')->constrained('users');
+                $table->foreignId('recipe_id')->constrained('recipes');
+                $table->text('body');
                 $table->timestamps();
             });
         }

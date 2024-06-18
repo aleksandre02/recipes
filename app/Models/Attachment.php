@@ -9,5 +9,4 @@ class Attachment extends Model
 {
     use HasFactory;
 
-    // Define relationships
 }

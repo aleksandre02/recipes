@@ -10,9 +10,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category_recipe', function (Blueprint $table) {
-            $table->id('category_recipe_id');
-            $table->foreignId('categories_id')->constrained('categories','categories_id')->onDelete('cascade');
-            $table->foreignId('recipe_id')->constrained('recipes','recipe_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
             $table->timestamps();
 
         });

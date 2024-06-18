@@ -10,8 +10,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('attachments', function (Blueprint $table) {
-            $table->id('attachment_id');
-            $table->foreignId('recipe_id')->constrained('recipes','recipe_id');
+            $table->id();
+            $table->foreignId('recipe_id')->constrained('recipes');
             $table->string('media');
             $table->timestamps();
         });

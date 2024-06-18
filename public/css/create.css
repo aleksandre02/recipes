@@ -1,0 +1,51 @@
+.add-recipe {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+}
+
+.add-recipe.container {
+    margin: 32px auto;
+}
+
+.add-recipe h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+form input, form textarea, form button {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+form input[type="file"] {
+    background-color: #333;
+    color: #fff;
+}
+
+form button {
+    background-color: #e50914;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+form button:hover {
+    background-color: #ff3300;
+}

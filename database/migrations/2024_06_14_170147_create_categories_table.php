@@ -11,9 +11,9 @@ return new class extends Migration
         public function up()
         {
             Schema::create('categories', function (Blueprint $table) {
-                $table->id('categories_id');
+                $table->id();
                 $table->string('name');
-                $table->string('cuisine_type');
+                $table->string('cuisine_type')->default('Georgian');
                 $table->timestamps();
             });
         }

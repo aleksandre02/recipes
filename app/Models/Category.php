@@ -11,11 +11,11 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'cuisine_type'];
 
     public function recipes()
     {
-        return $this->belongsToMany(Recipe::class, 'categories_recipe');
+        return $this->belongsToMany(Recipe::class, 'category_recipe');
     }
 
     // Define other relationships

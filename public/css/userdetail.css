@@ -1,0 +1,60 @@
+.user-detail {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+}
+
+.user-detail.container{
+    margin: 32px auto;
+}
+
+.user-detail h2, .user-detail h3 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.user-info {
+    margin-bottom: 2rem;
+}
+
+.user-info p {
+    font-size: 1.25rem;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.recipe-card {
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.recipe-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.recipe-card h4 {
+    font-size: 1.5rem;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.recipe-card p {
+    margin: 0.5rem 0;
+}
+
+.recipe-card span {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}

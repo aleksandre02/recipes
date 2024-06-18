@@ -1,54 +1,74 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\RecipeRequest;
+// use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
+use App\Models\Step;
 use Illuminate\Http\Request;
-    
-
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
     public function index()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::with('categories')->orderBy('created_at', 'desc')->get();
         return view('recipes.index', compact('recipes'));
     }
 
     public function create()
     {
+        if (!Auth::check()) {
+            abort(403);
+        }
+
         return view('recipes.create');
     }
-    public function store(RecipeRequest $request)
-    {
+
+    public function store(Request $request) {
         // Create a new recipe instance with validated data
-        $recipe = new Recipe($request->validated());
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:4000'
+        ]);
+
+        $recipe = new Recipe();
 
         // Handle file upload if present
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('photos', 'public');
-            $recipe->photo = $path;
+            $recipe->media = $path;
         }
 
+        $recipe->title = $request->title;
+        $recipe->description = $request->description;
+        $recipe->user_id = auth()->id();
         // Save the recipe to the database
         $recipe->save();
 
+        // Handle ingredients
+        $ingredients = explode("\n", $request->input('ingredients'));
+        foreach ($ingredients as $ingredient) {
+            list($name, $quantity) = explode('-', $ingredient);
+
+            // Assuming Ingredient model has a name and recipe_id
+            $recipe->ingredients()->create(
+                [
+                    'name' => $name,
+                    'quantity' => $quantity
+                ]
+            );
+        }
+
+        // Handle steps
+        $steps = explode("\n", $request->input('steps'));
+        foreach ($steps as $index => $step) {
+            // Assuming Step model has a description, step_number and recipe_id
+            $recipe->steps()->create(['description' => $step, 'step_number' => $index + 1]);
+        }
+
         // Redirect to the recipes index page
-        return redirect()->route('recipes.index');
+        return redirect()->route('recipes.show', $recipe->id)->with('success', 'Recipe has been created successfully');
     }
-    
-    // public function store(Request $request)
-    // {
-    //     $recipe = new Recipe();
-    //     $recipe->name = $request->name;
-    //     $recipe->description = $request->description;
-    //     $recipe->save();
-
-    //     // Save other details like ingredients, steps, etc.
-
-    //     return redirect()->route('recipes.index');
-    // }
-
     public function edit($id)
     {
         $recipe = Recipe::findOrFail($id);
@@ -58,7 +78,7 @@ class RecipeController extends Controller
     public function update(Request $request, $id)
     {
         $recipe = Recipe::findOrFail($id);
-        $recipe->name = $request->name;
+        $recipe->title = $request->title;
         $recipe->description = $request->description;
         $recipe->save();
 
