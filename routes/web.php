@@ -17,6 +17,10 @@ Route::post('/comments/{recipe}', [CommentController::class, 'store'])->name('co
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::post('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+Route::get('/recipes/search', [RecipeController::class, 'search'])->name('recipes.search');
+
+
 
 Route::get('/dashboard', function () {
     return redirect()->route('recipes.index');

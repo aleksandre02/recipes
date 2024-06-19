@@ -31,6 +31,12 @@
             <div class="user-info">
                 <p><strong>Username:</strong> <span id="username">{{ Auth::user()->username }}</span></p>
                 <p><strong>Email:</strong> <span id="email">{{ Auth::user()->email }}</span></p>
+                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+            @csrf
+            <button type="submit">
+                {{ __('Logout') }}
+            </button>
+        </form>
                 <!-- Do not display the password for security reasons -->
             </div>
             <h3>My Recipes</h3>

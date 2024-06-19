@@ -13,7 +13,7 @@ return new class extends Migration
                 $table->id();
                 $table->integer('step_number');
                 $table->text('description');
-                $table->foreignId('recipe_id')->constrained('recipes');
+                $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
                 $table->timestamps();
             });
         }

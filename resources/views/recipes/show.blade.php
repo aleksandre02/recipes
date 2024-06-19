@@ -18,8 +18,11 @@
 
                 </ul>
                 <div class="search-login">
-                    <input type="text" placeholder="Search...">
+                    <form action="{{ route('recipes.search') }}" method="GET">
+                        <input type="text" name="keyword" placeholder="Search...">
+                        <button type="submit" class="btn">Search</button>
                     <a class="btn" href="{{ route('userdetail') }}">My Profile</a>
+                    </form>
 
                 </div>
             </nav>
@@ -28,8 +31,9 @@
     <main>
         <section class="recipe-detail container">
             <h2 id="recipe-title">{{ $recipe->title }}</h2>
-            <img src="" alt="Dish Image" id="recipe-image">
+            <img src="{{ asset('storage/' . $recipe->media) }}" alt="{{ $recipe->title }}">
             <p id="recipe-description">{{ $recipe->description }}</p>
+           
             <h3>Ingredients</h3>
             <ul id="recipe-ingredients">
                 @if (count($recipe->ingredients) > 0)
@@ -63,6 +67,7 @@
                         @endforeach                              
                     @endif
                 </ul>
+            
                 <div class="add-comment">
                     <h4>Add a Comment</h4>
                     <form method="POST" action="{{ route('comments.store', $recipe->id)}}">
@@ -72,6 +77,18 @@
                     </form>
                 </div>
             </div>
+           
+            @auth
+        @if (Auth::user()->is_admin)
+            <form method="POST" action="{{ route('recipes.destroy', $recipe->id) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn">Delete Recipe</button>
+            </form>
+        @endif
+    @endauth
+
+            
         </section>
     </main>
     <footer>

@@ -18,10 +18,15 @@
                 </ul>
                 
                 <div class="search-login">
-                    <input type="text" placeholder="Search...">
+    <form action="{{ route('recipes.search') }}" method="GET">
+        <input type="text" name="keyword" placeholder="Search...">
+        <button type="submit" class="btn">Search</button>
+
                     <a class="btn" href="{{ route('userdetail') }}">My Profile</a>
 
                 </div>
+    </form>
+
             </nav>
         </div>
     </header>
@@ -98,8 +103,8 @@
                     @foreach ($recipes as $recipe)
                         <div class="recipe-card">
                             <a href="{{ route('recipes.show', $recipe->id) }}">
-                                <img src="{{ asset('Images/premium-1.png') }}" alt="premium placeholder">
-                                <h4>{{ $recipe->name }}</h4>
+                            <img src="{{ asset('storage/' . $recipe->media) }}" alt="{{ $recipe->title }}">
+                                <h4>{{ $recipe->title }}</h4>
                                 <p>{{ $recipe->description }}</p>
                                 @if (count($recipe->categories) > 0)
                                     <span class="categories">
@@ -107,12 +112,13 @@
                                     </span>                                
                                 @endif
                             </a>
+                           
                         </div>
                     @endforeach
                 </div> 
             </div>
         </section>
-        <section class="hero">
+        <!-- <section class="hero">
             <div class="hero-content">
                 <h2>Best of the week</h2>
                 <p>This dish has been selected unanimously across the platform.</p>
@@ -135,7 +141,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <section class="offer">
             <h2>Exclusive Limited-Time Offer!</h2>
             <p>Unlock premium access to our recipe collection and enjoy exclusive features.</p>

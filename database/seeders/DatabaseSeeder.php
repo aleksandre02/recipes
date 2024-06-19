@@ -9,6 +9,8 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Step;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +18,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
+    {   
         // Create users
         $user = User::create([
             'username' => 'john_doe',
@@ -131,5 +133,6 @@ class DatabaseSeeder extends Seeder
             ['body' => 'Best chocolate cake ever!', 'user_id' => $user->id, 'recipe_id' => $dessertRecipe->id],
             ['body' => 'So rich and delicious.', 'user_id' => $user->id, 'recipe_id' => $dessertRecipe->id],
         ]);
+       
     }
 }

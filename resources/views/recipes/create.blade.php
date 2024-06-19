@@ -36,7 +36,7 @@
 
                 <label for="recipe-photo">Upload Image</label>
                 <input type="file" id="recipe-photo" name="media" accept="image/*" required>
-
+              
                 <label for="recipe-description">Description</label>
                 <textarea id="recipe-description" name="description" rows="3" required></textarea>
 
