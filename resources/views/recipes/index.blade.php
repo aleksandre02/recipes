@@ -18,14 +18,13 @@
                 </ul>
                 
                 <div class="search-login">
-    <form action="{{ route('recipes.search') }}" method="GET">
-        <input type="text" name="keyword" placeholder="Search...">
-        <button type="submit" class="btn">Search</button>
-
-                    <a class="btn" href="{{ route('userdetail') }}">My Profile</a>
+                    <form action="{{ route('recipes.search') }}" method="GET">
+                        <input type="text" name="keyword" placeholder="Search...">
+                        <button type="submit" class="btn">Search</button>
+                        <a class="btn" href="{{ route('userdetail') }}">My Profile</a>
 
                 </div>
-    </form>
+                    </form>
 
             </nav>
         </div>
